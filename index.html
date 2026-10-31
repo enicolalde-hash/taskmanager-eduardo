@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskManager - Eduardo Nicolalde</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Mi TaskManager</h1>
+        <p>Organizador personal de tareas</p>
+    </header>
+
+    <main>
+
+        <!-- Panel de resumen -->
+        <section class="panel">
+            <h2>Resumen de tareas</h2>
+
+            <div class="dashboard">
+                <article class="tarjeta">
+                    <h3>Total</h3>
+                    <p id="totalTareas">0</p>
+                </article>
+
+                <article class="tarjeta">
+                    <h3>Pendientes</h3>
+                    <p id="tareasPendientes">0</p>
+                </article>
+
+                <article class="tarjeta">
+                    <h3>Completadas</h3>
+                    <p id="tareasCompletadas">0</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Registro de tareas -->
+        <section class="panel">
+            <h2>Registrar una tarea</h2>
+
+            <form id="formTarea">
+
+                <label for="titulo">Nombre de la tarea</label>
+                <input
+                    type="text"
+                    id="titulo"
+                    placeholder="Ejemplo: Estudiar JavaScript"
+                    maxlength="100"
+                    required
+                >
+
+                <label for="prioridad">Prioridad</label>
+                <select id="prioridad">
+                    <option value="alta">Alta</option>
+                    <option value="media" selected>Media</option>
+                    <option value="baja">Baja</option>
+                </select>
+
+                <button type="submit" id="btnGuardar">
+                    Guardar tarea
+                </button>
+
+                <button type="button" id="btnCancelar" hidden>
+                    Cancelar edición
+                </button>
+            </form>
+        </section>
+
+        <!-- Búsqueda, filtros y ordenamiento -->
+        <section class="panel">
+            <h2>Mis tareas</h2>
+
+            <div class="controles">
+                <input
+                    type="search"
+                    id="buscar"
+                    placeholder="Buscar una tarea..."
+                    aria-label="Buscar tareas por título"
+                >
+
+                <label for="filtro">Mostrar</label>
+                <select id="filtro">
+                    <option value="todas">Todas</option>
+                    <option value="pendientes">Pendientes</option>
+                    <option value="completadas">Completadas</option>
+                </select>
+
+                <label for="ordenar">Ordenar por</label>
+                <select id="ordenar">
+                    <option value="fecha">Fecha de creación</option>
+                    <option value="prioridad">Prioridad</option>
+                </select>
+            </div>
+
+            <ul id="listaTareas">
+                <!-- Aquí aparecerán las tareas -->
+            </ul>
+        </section>
+
+        <p id="mensaje" role="status" aria-live="polite"></p>
+
+    </main>
+
+    <footer>
+        <p>Eduardo Nicolalde - ECOTEC - 2026</p>
+    </footer>
+
+    <script type="module" src="js/app.js"></script>
+
+</body>
+</html>
