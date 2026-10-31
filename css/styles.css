@@ -1,0 +1,162 @@
+
+/* Colores principales */
+:root {
+    --azul: #1b4d89;
+    --fondo: #f4f6f9;
+    --texto: #333333;
+    --blanco: #ffffff;
+}
+
+/* Estilos generales */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--fondo);
+    color: var(--texto);
+}
+
+/* Encabezado */
+header {
+    background-color: var(--azul);
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+header h1 {
+    margin-bottom: 10px;
+}
+
+/* Contenido principal */
+main {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 15px;
+}
+
+/* Paneles */
+.panel {
+    background-color: var(--blanco);
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px #00000012;
+}
+
+.panel h2 {
+    color: var(--azul);
+}
+
+/* Resumen de tareas */
+.dashboard {
+    display: flex;
+    gap: 15px;
+}
+
+.tarjeta {
+    background-color: #eaf1fa;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    flex: 1;
+}
+
+.tarjeta h3 {
+    margin-top: 0;
+}
+
+.tarjeta p {
+    font-size: 30px;
+    font-weight: bold;
+    color: var(--azul);
+}
+
+/* Formulario */
+#formTarea {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+input, select, button {
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    padding: 12px;
+    border-radius: 6px;
+}
+
+input, select {
+    border: 1px solid #cccccc;
+}
+
+button {
+    background-color: var(--azul);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #12345c;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 3px solid #f4b942;
+    outline-offset: 2px;
+}
+
+/* Filtros y búsqueda */
+.controles {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+#listaTareas {
+    list-style: none;
+    padding: 0;
+}
+
+#listaTareas li {
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    background-color: #eaf1fa;
+}
+
+/* Mensajes */
+#mensaje {
+    text-align: center;
+}
+
+/* Pie de página */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--azul);
+    color: white;
+}
+
+/* Adaptación a celulares */
+@media (max-width: 600px) {
+    .dashboard {
+        flex-direction: column;
+    }
+
+    .controles {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    main {
+        margin: 10px auto;
+    }
+
+    .panel {
+        padding: 15px;
+    }
+}
