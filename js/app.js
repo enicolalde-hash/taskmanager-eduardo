@@ -1,11 +1,20 @@
 
+/* Funciones para administrar las tareas */
 import {
     tareas,
     agregarTarea,
     cambiarEstado,
     editarTarea,
-    eliminarTarea
+    eliminarTarea,
+    importarTareasApi
 } from "./tasks.js";
+
+/* Función para consultar la API REST */
+import { consultarTareasAPI } from "./api.js";
+
+/* Función para recuperar los datos locales */
+import { cargarTareas } from "./storage.js";
+
 
 /* Elementos HTML */
 const formulario = document.getElementById("formTarea");
@@ -16,6 +25,13 @@ const mensaje = document.getElementById("mensaje");
 
 const btnGuardar = document.getElementById("btnGuardar");
 const btnCancelar = document.getElementById("btnCancelar");
+
+
+/* Controles para buscar, filtrar y ordenar */
+const buscar = document.getElementById("buscar");
+const filtro = document.getElementById("filtro");
+const ordenar = document.getElementById("ordenar");
+
 
 /* Identificador de la tarea que estamos editando */
 let idEnEdicion = null;
@@ -80,18 +96,61 @@ function limpiarFormulario() {
     btnCancelar.hidden = true;
 }
 
+
+/* Obtener las tareas según los filtros */
+function obtenerTareasVisibles() {
+    const texto = buscar.value.trim().toLowerCase();
+    const estado = filtro.value;
+
+    let resultado = tareas.filter(function(tarea) {
+        const coincideTitulo = tarea.titulo
+            .toLowerCase()
+            .includes(texto);
+
+        const coincideEstado =
+            estado === "todas" ||
+            (estado === "pendientes" && !tarea.completada) ||
+            (estado === "completadas" && tarea.completada);
+
+        return coincideTitulo && coincideEstado;
+    });
+
+    /* Ordenar sin modificar el arreglo original */
+    resultado = [...resultado];
+
+    if (ordenar.value === "prioridad") {
+        const niveles = {
+            alta: 3,
+            media: 2,
+            baja: 1
+        };
+
+        resultado.sort(function(a, b) {
+            return niveles[b.prioridad] - niveles[a.prioridad];
+        });
+    } else {
+        resultado.sort(function(a, b) {
+            return b.fechaCreacion.localeCompare(a.fechaCreacion);
+        });
+    }
+
+    return resultado;
+}
+
+
 /* Mostrar todas las tareas */
 function mostrarTareas() {
     lista.innerHTML = "";
+    const tareasVisibles = obtenerTareasVisibles();
 
-    if (tareas.length === 0) {
+    if (tareasVisibles.length === 0) {
         const aviso = document.createElement("li");
         aviso.textContent = "Todavía no tienes tareas registradas.";
         lista.appendChild(aviso);
         return;
     }
 
-    tareas.forEach(function(tarea) {
+    tareasVisibles.forEach(function(tarea) {
         const elemento = document.createElement("li");
 
         /* Información de la tarea */
@@ -186,5 +245,51 @@ function actualizarPantalla() {
     actualizarDashboard();
 }
 
+
+/* Buscar mientras el usuario escribe */
+buscar.addEventListener("input", mostrarTareas);
+
+/* Filtrar al seleccionar un estado */
+filtro.addEventListener("change", mostrarTareas);
+
+/* Ordenar al cambiar la selección */
+ordenar.addEventListener("change", mostrarTareas);
+
 /* Iniciar la aplicación */
-actualizarPantalla();
+
+/* Iniciar TaskManager */
+async function iniciarAplicacion() {
+    actualizarPantalla();
+
+    /* Si hay datos locales, utilizarlos */
+    if (cargarTareas() !== null) {
+        mensaje.textContent =
+            "Tareas recuperadas del navegador.";
+        return;
+    }
+
+    /* Si no hay datos, consultar la API */
+    try {
+        mensaje.textContent =
+            "Consultando tareas de ejemplo...";
+
+        const datos = await consultarTareasAPI();
+
+        const cantidad = importarTareasApi(datos);
+
+        mensaje.textContent =
+            cantidad + " tareas importadas desde JSONPlaceholder.";
+
+    } catch (error) {
+        console.error("Error al consultar la API:", error);
+
+        mensaje.textContent =
+            "No pudimos conectar con la API. " +
+            "Puedes seguir registrando tareas sin internet.";
+    }
+
+    actualizarPantalla();
+}
+
+iniciarAplicacion();
+
