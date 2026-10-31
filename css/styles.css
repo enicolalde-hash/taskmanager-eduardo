@@ -160,3 +160,86 @@ footer {
         padding: 15px;
     }
 }
+
+
+/* Presentación de las tareas registradas */
+#listaTareas li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+#listaTareas li button {
+    padding: 8px 12px;
+}
+
+#listaTareas li span {
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 600px) {
+    #listaTareas li {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+
+/* Botones de las tareas */
+.acciones-tarea {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.acciones-tarea button {
+    padding: 8px 12px;
+    font-size: 13px;
+}
+
+/* Editar tarea */
+.btn-editar {
+    background-color: #d99a16;
+    color: #ffffff;
+}
+
+.btn-editar:hover {
+    background-color: #ab7510;
+}
+
+/* Eliminar tarea */
+.btn-eliminar {
+    background-color: #c0392b;
+    color: #ffffff;
+}
+
+.btn-eliminar:hover {
+    background-color: #922b21;
+}
+
+/* Botón cancelar edición */
+#btnCancelar {
+    background-color: #777777;
+}
+
+#btnCancelar:hover {
+    background-color: #555555;
+}
+
+/* Evitar que el texto se desborde */
+#listaTareas li span {
+    overflow-wrap: anywhere;
+    flex: 1;
+}
+
+/* Adaptación a celulares */
+@media (max-width: 600px) {
+    .acciones-tarea {
+        width: 100%;
+    }
+
+    .acciones-tarea button {
+        flex: 1;
+    }
+}
