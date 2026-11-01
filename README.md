@@ -51,6 +51,8 @@ taskmanager-eduardo/
 │   └── evidencias/
 ├── README.md
 └── AI_DECLARATION.md
+├── img/
+│   └── eduardo.png
 ```
 
 Los archivos JavaScript tienen funciones diferentes: `app.js` controla la interfaz; `tasks.js` administra las tareas; `api.js` consulta la API; y `storage.js` guarda y recupera los datos del navegador.
@@ -85,4 +87,16 @@ Durante el desarrollo probé la importación de 200 tareas desde JSONPlaceholder
 
 Esta actividad me ayudó a comprender cómo JavaScript permite interactuar con una página HTML y actualizar su contenido. Aprendí también a utilizar `localStorage`, consultar una API y revisar los errores desde la consola del navegador.
 
-**Estado:** desarrollo y pruebas locales completados. Enlace del repositorio público por incorporar cuando finalice la publicación.
+## Publicación del proyecto
+
+**Estado:** Proyecto finalizado y publicado.
+
+**Repositorio:**
+https://github.com/enicolalde-hash/taskmanager-eduardo
+
+**Aplicación web:**
+https://enicolalde-hash.github.io/taskmanager-eduardo/
+
+**Evidencias:**
+Las capturas del desarrollo y las pruebas están organizadas
+en la carpeta docs/evidencias.
