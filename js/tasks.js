@@ -57,15 +57,28 @@ export function eliminarTarea(id) {
     }
 }
 
-/* Importar tareas de JSONPlaceholder */
+
+/* Importar ejemplos desde JSONPlaceholder */
 export function importarTareasApi(datos) {
+    const ejemplos = [
+        ["Revisar los ultimos detalles de mi actividad integradora", "alta"],
+        ["Organizar las capturas para el informe de Programacion Web", "alta"],
+        ["Comprobar que TaskManager funcione en GitHub Pages", "alta"],
+        ["Terminar el informe y revisar las referencias", "alta"],
+        ["Repasar los modulos de JavaScript vistos en clase", "media"],
+        ["Practicar consultas a una API REST", "media"],
+        ["Revisar las tareas pendientes de la universidad", "media"],
+        ["Organizar las actividades de esta semana", "media"],
+        ["Revisar los pendientes del trabajo", "alta"],
+        ["Actualizar la documentacion de mis proyectos", "media"],
+        ["Dedicar unos minutos a practicar ingles", "baja"],
+        ["Ordenar los archivos y materiales de estudio", "baja"]
+    ];
+
     let agregadas = 0;
+    const idsExistentes = new Set(tareas.map(tarea => tarea.id));
 
-    const idsExistentes = new Set(
-        tareas.map(tarea => tarea.id)
-    );
-
-    datos.forEach(function(dato) {
+    datos.slice(0, ejemplos.length).forEach(function(dato, indice) {
         const id = "api-" + dato.id;
 
         if (
@@ -79,8 +92,8 @@ export function importarTareasApi(datos) {
 
         const nuevaTarea = {
             id: id,
-            titulo: dato.title.trim(),
-            prioridad: "media",
+            titulo: ejemplos[indice][0],
+            prioridad: ejemplos[indice][1],
             completada: Boolean(dato.completed),
             fechaCreacion: new Date().toISOString()
         };
@@ -90,10 +103,8 @@ export function importarTareasApi(datos) {
         agregadas++;
     });
 
-    if (agregadas > 0) {
-        if (!guardarTareas(tareas)) {
-            throw new Error("No se pudieron guardar las tareas.");
-        }
+    if (agregadas > 0 && !guardarTareas(tareas)) {
+        throw new Error("No se pudieron guardar las tareas.");
     }
 
     return agregadas;

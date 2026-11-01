@@ -79,6 +79,8 @@ En una sesión nueva del navegador se importaron **200 tareas** desde JSONPlaceh
 
 Además, hice una prueba sin internet. La aplicación mostró un mensaje al fallar la consulta de la API, permitió registrar una tarea manualmente y la recuperó después de actualizar la página.
 
+Durante el desarrollo probé la importación de 200 tareas desde JSONPlaceholder. Para la versión final adapté los títulos de 12 tareas de ejemplo al español, utilizando actividades relacionadas con mis estudios y pendientes cotidianos. La aplicación continúa consultando la API, conserva los estados de las tareas y permite guardar los cambios en localStorage.
+
 ## Lo que aprendí
 
 Esta actividad me ayudó a comprender cómo JavaScript permite interactuar con una página HTML y actualizar su contenido. Aprendí también a utilizar `localStorage`, consultar una API y revisar los errores desde la consola del navegador.
